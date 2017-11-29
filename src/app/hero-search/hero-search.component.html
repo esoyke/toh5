@@ -4,6 +4,10 @@
   <input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
 
   <ul class="search-result">
+    <!-- NOTE: Not using the sync pipe here would cause this error:
+      ERROR Error: Cannot find a differ supporting object '[object Object]' 
+      of type 'object'. NgFor only supports binding to Iterables such as Arrays.
+    -->
     <li *ngFor="let hero of heroes$ | async" >
       <a routerLink="/detail/{{hero.id}}">
         {{hero.name}}
