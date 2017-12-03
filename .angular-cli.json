@@ -22,11 +22,11 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",        
         "sass/styles.scss"
       ],
-      // "stylePreprocessorOptions": {
-      //   "includePaths": [
-      //     "my-path"
-      //   ]
-      // },
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "my-path-future"
+        ]
+      },
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
