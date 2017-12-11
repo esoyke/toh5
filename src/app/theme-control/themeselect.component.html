@@ -1,0 +1,4 @@
+<select [(ngModel)]="currentTheme">
+    <option *ngFor="let theme of themes" [ngValue]="theme">{{theme.name}}</option>
+</select>
+<button (click)="setCurrentTheme()">Apply Theme</button>

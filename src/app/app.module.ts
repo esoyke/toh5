@@ -17,6 +17,10 @@ import { HeroService }          from './hero.service';
 import { MessageService }       from './message.service';
 import { MessagesComponent }    from './messages/messages.component';
 
+// theming
+import { ThemeSelectComponent } from './theme-control/themeselect.component';
+import { ThemeService }         from './theme-control/theme.service';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -37,9 +41,10 @@ import { MessagesComponent }    from './messages/messages.component';
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
-    HeroSearchComponent
+    HeroSearchComponent,
+    ThemeSelectComponent
   ],
-  providers: [ HeroService, MessageService ],
+  providers: [ HeroService, MessageService, ThemeService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

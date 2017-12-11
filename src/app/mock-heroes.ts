@@ -1,7 +1,8 @@
+// BTW, this isn't being used, we intercept http requests with the in-memory-data service
 import { Hero } from './hero';
 
 export const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
+  { id: 11, name: 'Mr. MOCK' },
   { id: 12, name: 'Narco' },
   { id: 13, name: 'Bombasto' },
   { id: 14, name: 'Celeritas' },

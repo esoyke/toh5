@@ -1,9 +1,10 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
+// mocking service that intercepts requests. For instance a request for /heroes will return the heroes object
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const heroes = [
-      { id: 11, name: 'Mr. Nice' },
+      { id: 11, name: 'Mr. Memory' },
       { id: 12, name: 'Narco' },
       { id: 13, name: 'Bombasto' },
       { id: 14, name: 'Celeritas' },
@@ -14,6 +15,12 @@ export class InMemoryDataService implements InMemoryDbService {
       { id: 19, name: 'Magma' },
       { id: 20, name: 'Tornado' }
     ];
-    return {heroes};
+
+    // AP2 custom themes
+    const themes = [
+      { id: 1, name: 'Theme-Forward One', custom_color_background: '#FFF', custom_color_header: '#F00' },
+      { id: 2, name: 'Theme-Founders', custom_color_background: '#ABA', custom_color_header: '#CDC' },
+    ]
+    return {heroes, themes};
   }
 }
