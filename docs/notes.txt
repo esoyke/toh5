@@ -1,0 +1,35 @@
+NOTE: This txt file was created in Visual Studio Code with word wrap enabled, to enable this in VSC, go to your Settings and add the following snippet:
+    "[plaintext]": {
+        "editor.wordWrap": "on"
+    }
+
+Requirements:
+    Node/npm
+    Angular CLI
+    Visual Studio Code (suggested, though other Typescript enabled editors will suffice)
+
+This project is an Angular CLI-based project. Once the repo is cloned locally, you should install Angular CLI if you have not already done so glabally:
+    npm install -g @angular/cli
+
+To build the app:
+    npm i    
+
+To run the app locally:
+    ng serve
+
+Steps for using repo in Windows within PSCU corporate firewall (only applies while I have repo in GitHub):
+    1- Export root PSCU cert. 
+       a- From Program Files type 'certmgr.msc'
+       b- In left hand side, choose 'Trusted Root Certificate Authorities' > 'Certificates'
+       c- Double click 'PSCU Root Certificate Authority' to open cert
+       d- Go to Details tab, click 'Copy to File'
+       e- Follow Wizard, selecting Base-64 CER as output, save to a local location
+    2- Make copy of GIT's ca-bundle.crt (this file is currently found under 'C:\Program Files\Git\mingw64\ssl\certs), save to C:/Users/you
+    3- Add root cert to the newly copied ca-bundle.crt. Open file in text editor such as vi, paste contents of root cert to end. Save file.
+       -----BEGIN CERTIFICATE-----
+       MIIH0zCCBbugAwIBAgIIXsO3pkN/pOAwDQYJKoZIhvcNAQ...etc
+       -----END CERTIFICATE-----
+    4- Update GIT's config to use new file. Type 'git config --global http.sslCAInfo C:/Users/you/ca-bundle.crt
+    5- Restart any GIT clients, such as your integrated IDE.
+    6- Test a push to the remote. If connecting to GitHub, it will popup a login dialog for your GitHub login.
+
