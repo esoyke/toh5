@@ -4,13 +4,19 @@ import { ThemeService } from './theme.service';
 
 @Component({
     selector: 'theme-select',
-    templateUrl: 'themeselect.component.html'
+    template: `
+        <select [(ngModel)]="currentTheme">
+            <option [disabled]="true" [ngValue]="null">Select</option>
+            <option *ngFor="let theme of themes" [ngValue]="theme">{{theme.name}}</option>
+        </select>
+        <button (click)="setCurrentTheme()">Apply Theme</button>
+    `
 })
 
 // small component to allow seleciton of theme
 export class ThemeSelectComponent implements OnInit {
     themes: Theme[];
-    @Input() currentTheme: Theme;
+    @Input() currentTheme: Theme = null;
 
     constructor(private themeService: ThemeService) { }
 
@@ -22,6 +28,7 @@ export class ThemeSelectComponent implements OnInit {
         .subscribe(themes => this.themes = themes)
     }
     setCurrentTheme(): void {
+        console.log('setting theme...');
         this.themeService.updateCurrentTheme(this.currentTheme)
     }
 }

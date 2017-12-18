@@ -18,8 +18,8 @@ export class InMemoryDataService implements InMemoryDbService {
 
     // AP2 custom themes
     const themes = [
-      { id: 1, name: 'Theme-Forward One', custom_color_background: '#FFF', custom_color_header: '#F00' },
-      { id: 2, name: 'Theme-Founders', custom_color_background: '#ABA', custom_color_header: '#CDC' },
+      { id: 1, name: 'Theme-Forward One', custom_color_background: 'lightblue', custom_color_header: 'darkblue' },
+      { id: 2, name: 'Theme-Founders', custom_color_background: 'lightgreen', custom_color_header: 'darkgreen' },
     ]
     return {heroes, themes};
   }

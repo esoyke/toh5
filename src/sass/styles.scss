@@ -10,26 +10,27 @@
 @import './mixins';
 
 
-// variables, can be changed in the theme service
+// CSS variables, can be changed in the theme service
+// UPDATE: Sadly this does not work worth a damn in IE, need a new approach other than CSS variables!
 :root {
   --text-color: black;
   --header-color: black;
-  --background-color: white;
+  --background-color: lightgray;
 }
 
 body {
-  color: var(--text-color);
-  background: var(--background-color);
+  color: var(--text-color, black);
+  background: var(--background-color, lightblue);
 }
 
 h1 {
-  color: var(--header-color);  
+  color: var(--header-color, black);  
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
 
 h2, h3 {
-  color: var(--header-color);    
+  color: var(--header-color, black);    
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }

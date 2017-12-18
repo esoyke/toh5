@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ElementRef } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -8,6 +8,8 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Theme } from './theme';
 import { MessageService } from '../message.service';
  
+import * as _ from 'lodash';
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,17 +20,30 @@ export class ThemeService {
 
   private themesUrl = 'api/themes';  // URL to web api
   private ctrl;
+  private current;
+  private themes;
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) {    }
+    private messageService: MessageService,
+  //  private elRef_customHeader: ElementRef
+  ){    }
 
-  /** GET themes from the server, apply the first it finds (make Forward One or default the 1st) */
+
+    ngAfterInit() {
+      // init to first theme until one chosen (make Forward One or default the 1st)
+      this.updateCurrentTheme(this.themes[0]);
+    }
+
+
+  /** GET themes from the server */
   getThemes (): Observable<Theme[]> {
     return this.http.get<Theme[]>(this.themesUrl)
       .pipe(
-        tap(themes => {this.log(`fetched themes`); 
-          this.updateCurrentTheme(themes[0])}),
+        tap(themes => {        
+          this.log('fetched '+themes.length+' themes');
+          this.themes = themes; 
+        }),
         catchError(this.handleError('getThemes', []))
       );
   }
@@ -61,13 +76,49 @@ export class ThemeService {
   updateCurrentTheme (current: Theme){
     console.log('current theme: ',current);
     tap(_ => this.log(`updated theme to: ${current.name}`));    
+    this.messageService.add('ThemeService: applying theme: "'+current.name+'"');
 
+    // approach 1 (CSS variables, not working for IE)
+    /*
     // set background color
     var bodyStyles = document.body.style;
     bodyStyles.setProperty('--background-color', current.custom_color_background);
 
     // set h1/h2/h3 colors
     bodyStyles.setProperty('--header-color', current.custom_color_header);
+    */
+
+    // approach 2 (select elements from DOM and update all manually)
+    this.themeAllElementsByClassname('customColorHeader', current.custom_color_header);
+    this.themeAllElementsByTagname('body', current.custom_color_background, 'background');
+  }
+
+  themeAllElementsByClassname(className: string, colorValue: string, styleValue?: string) {
+    let elements = document.querySelectorAll('.'+className);
+    _.each(elements, function(elem){
+      if(!styleValue || styleValue==='color'){
+        //console.debug('updating color to '+colorValue+' on element: ', elem);
+        elem.style.color=colorValue;
+      }
+      else if (styleValue && styleValue==='background'){
+        //console.debug('updating '+styleValue+' to '+colorValue+' on element: ', elem);
+        elem.style.background=colorValue;
+      }
+    })
+  }
+
+  themeAllElementsByTagname(tagName: string, colorValue: string, styleValue?: string) {
+    let elements = document.querySelectorAll(tagName);
+    _.each(elements, function(elem){
+      if(!styleValue || styleValue==='color'){
+        // console.debug('updating color to '+colorValue+' on element: ', elem);
+        elem.style.color=colorValue;
+      }
+      else if (styleValue && styleValue==='background'){
+        // console.debug('updating '+styleValue+' to '+colorValue+' on element: ', elem);
+        elem.style.background=colorValue;
+      }
+    })
   }
 
   //////// Save methods //////////
