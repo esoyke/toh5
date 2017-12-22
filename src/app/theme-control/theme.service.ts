@@ -91,6 +91,10 @@ export class ThemeService {
     // approach 2 (select elements from DOM and update all manually)
     this.themeAllElementsByClassname('customColorHeader', current.custom_color_header);
     this.themeAllElementsByTagname('body', current.custom_color_background, 'background');
+    this.themeAllElementsByClassname('customColorSidebar', current.custom_color_sidebar, 'background');
+
+    // approach 3 TODO- set all classes/elements based on metadata in theming JSON object, thus we could read the theme file,
+    // and loop through without neeing to write any code here.
   }
 
   themeAllElementsByClassname(className: string, colorValue: string, styleValue?: string) {

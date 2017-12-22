@@ -18,9 +18,15 @@ export class InMemoryDataService implements InMemoryDbService {
 
     // AP2 custom themes
     const themes = [
-      { id: 1, name: 'Theme-Forward One', custom_color_background: 'lightblue', custom_color_header: 'darkblue' },
-      { id: 2, name: 'Theme-Founders', custom_color_background: 'lightgreen', custom_color_header: 'darkgreen' },
+      { id: 1, name: 'Theme-Forward One', custom_color_background: 'lightblue', custom_color_header: 'darkblue', custom_color_sidebar: 'blue' },
+      { id: 2, name: 'Theme-Founders', custom_color_background: 'lightgreen', custom_color_header: 'darkgreen', custom_color_sidebar: 'green' },
     ]
-    return {heroes, themes};
+    
+    const navlinks = [
+      { id: 1, name: 'Account Summary' },
+      { id: 2, name: 'Balance Consolidation' },
+      { id: 2, name: 'Statements' },
+    ]
+    return {heroes, themes, navlinks};
   }
 }

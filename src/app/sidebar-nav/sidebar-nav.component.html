@@ -1,0 +1,21 @@
+<!--component html goes here -->
+<div class='sidebarNav customColorSidebar d-flex flex-column'>
+
+        <ul class="heroes">
+            <li *ngFor="let link of navlinks">
+                <!-- <a routerLink="/detail/{{hero.id}}"> -->
+                <span class="badge p-2">{{link.name}}</span>
+                <!-- </a> -->
+           </li>
+        </ul>
+        
+    <!-- <sidebar-button class="p-2">{{name}}</sidebar-button>
+    <sidebar-button class="p-2">Flex item 2</sidebar-button>
+    <sidebar-button class="p-2">Flex item 3</sidebar-button> -->
+</div>
+
+<!-- <div class="d-flex flex-column sidebarNav">
+    <div class="p-2">Flex item 1</div>
+    <div class="p-2">Flex item 2</div>
+    <div class="p-2">Flex item 3</div>
+</div> -->

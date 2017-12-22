@@ -17,9 +17,17 @@ import { HeroService }          from './hero.service';
 import { MessageService }       from './message.service';
 import { MessagesComponent }    from './messages/messages.component';
 
+// Bootstrap, add modules as needed
+//import { AlertModule } from 'ngx-bootstrap';
+
 // theming
 import { ThemeSelectComponent } from './theme-control/themeselect.component';
 import { ThemeService }         from './theme-control/theme.service';
+
+// custom AP2 components
+import { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
+import { SidebarButtonComponent } from './sidebar-nav/sidebar-button/sidebar-button.component';
+import { SidebarService }         from './sidebar-nav/sidebar.service';
 
 @NgModule({
   imports: [
@@ -33,7 +41,9 @@ import { ThemeService }         from './theme-control/theme.service';
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    // Bootstrap imports, add as needed
+    // AlertModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -42,9 +52,11 @@ import { ThemeService }         from './theme-control/theme.service';
     HeroDetailComponent,
     MessagesComponent,
     HeroSearchComponent,
-    ThemeSelectComponent
+    ThemeSelectComponent,
+    SidebarNavComponent,
+    SidebarButtonComponent,
   ],
-  providers: [ HeroService, MessageService, ThemeService ],
+  providers: [ HeroService, MessageService, ThemeService, SidebarService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -5,5 +5,6 @@ export class Theme {
     name: string;
     custom_color_header: string;
     custom_color_background: string;
+    custom_color_sidebar: string;    
   }
   
