@@ -25,6 +25,8 @@ import { ThemeSelectComponent } from './theme-control/themeselect.component';
 import { ThemeService }         from './theme-control/theme.service';
 
 // custom AP2 components
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 import { SidebarNavComponent } from './sidebar-nav/sidebar-nav.component';
 import { SidebarButtonComponent } from './sidebar-nav/sidebar-button/sidebar-button.component';
 import { SidebarService }         from './sidebar-nav/sidebar.service';
@@ -53,6 +55,8 @@ import { SidebarService }         from './sidebar-nav/sidebar.service';
     MessagesComponent,
     HeroSearchComponent,
     ThemeSelectComponent,
+    HeaderComponent,
+    FooterComponent,
     SidebarNavComponent,
     SidebarButtonComponent,
   ],

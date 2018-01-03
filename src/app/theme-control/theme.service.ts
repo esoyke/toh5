@@ -14,6 +14,10 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+// type AnyJson =  boolean | number | string | null | JsonArray | JsonMap;
+// interface JsonMap {  [key: string]: AnyJson; }
+// interface JsonArray extends Array<AnyJson> {}
+
 // This service retrieves all themes, exposed method to update defined CSS variables to values specified for theme
 @Injectable()
 export class ThemeService {
@@ -22,6 +26,8 @@ export class ThemeService {
   private ctrl;
   private current;
   private themes;
+  private logoImage = '/assets/logo-2113.png';
+  // private self = this;
 
   constructor(
     private http: HttpClient,
@@ -78,52 +84,56 @@ export class ThemeService {
     tap(_ => this.log(`updated theme to: ${current.name}`));    
     this.messageService.add('ThemeService: applying theme: "'+current.name+'"');
 
-    // approach 1 (CSS variables, not working for IE)
-    /*
-    // set background color
-    var bodyStyles = document.body.style;
-    bodyStyles.setProperty('--background-color', current.custom_color_background);
-
-    // set h1/h2/h3 colors
-    bodyStyles.setProperty('--header-color', current.custom_color_header);
-    */
-
-    // approach 2 (select elements from DOM and update all manually)
-    this.themeAllElementsByClassname('customColorHeader', current.custom_color_header);
-    this.themeAllElementsByTagname('body', current.custom_color_background, 'background');
-    this.themeAllElementsByClassname('customColorSidebar', current.custom_color_sidebar, 'background');
-
-    // approach 3 TODO- set all classes/elements based on metadata in theming JSON object, thus we could read the theme file,
+    // set all classes/elements based on metadata in theming JSON object, thus we could read the theme file,
     // and loop through without neeing to write any code here.
-  }
-
-  themeAllElementsByClassname(className: string, colorValue: string, styleValue?: string) {
-    let elements = document.querySelectorAll('.'+className);
-    _.each(elements, function(elem){
-      if(!styleValue || styleValue==='color'){
-        //console.debug('updating color to '+colorValue+' on element: ', elem);
-        elem.style.color=colorValue;
-      }
-      else if (styleValue && styleValue==='background'){
-        //console.debug('updating '+styleValue+' to '+colorValue+' on element: ', elem);
-        elem.style.background=colorValue;
-      }
+    _.each(current.customs, (custom)=>{
+      this.themeIt(custom);
     })
   }
 
-  themeAllElementsByTagname(tagName: string, colorValue: string, styleValue?: string) {
-    let elements = document.querySelectorAll(tagName);
-    _.each(elements, function(elem){
-      if(!styleValue || styleValue==='color'){
-        // console.debug('updating color to '+colorValue+' on element: ', elem);
-        elem.style.color=colorValue;
+
+  // themes by setting style.color on all elements with class  'className', 
+  // can override styleValue to set other attributes such as 'background'
+  // can override to apply to all DOM elements with matching tagName such as 'body'
+  private themeIt(custom: any){
+    
+    if(custom.image){//&& custom.name==='logo') {
+      console.log('updating image '+custom.image+' to '+custom.value);
+      this.logoImage=custom.value;
+      return;
+    }
+
+    let elements;
+    if(custom.tag) { // by tag 
+      console.log('selecting elements by tag "'+custom.tag+'"');
+      elements = document.querySelectorAll(custom.tag);
+    }
+    else { // by CSS class
+      console.log('selecting elements by classname "'+custom.name+'"');
+      elements = document.querySelectorAll('.'+custom.name);
+    }
+
+    // apply
+    _.each(elements, (elem)=>{
+      if(!custom.style || custom.style==='color'){
+        //console.log('updating color to '+custom.value+' on element: ', elem);
+        elem.style.color=custom.value;
       }
-      else if (styleValue && styleValue==='background'){
-        // console.debug('updating '+styleValue+' to '+colorValue+' on element: ', elem);
-        elem.style.background=colorValue;
+      else if (custom.style && custom.style==='background'){
+        //console.log('updating '+custom.style+' to '+custom.value+' on element: ', elem);
+        elem.style.background=custom.value;
       }
-    })
+      //TODO adjust syntax to allow other than color and background
+      else
+        console.log('Style "'+custom.style+'" not supported by theming library');
+    });
   }
+
+  logo(){
+    console.log('returning image');
+    return this.logoImage;//'/assets/logo-2113.png';
+  }
+
 
   //////// Save methods //////////
 

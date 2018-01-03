@@ -17,9 +17,40 @@ export class InMemoryDataService implements InMemoryDbService {
     ];
 
     // AP2 custom themes
+    //
+    //  At the moment I am structuring the custom color elements as such:
+    //    {name: 'val', value: '#FFF', tag: 'tagName', style: 'background'}
+    //  By default the defined style.color is applied to elements with the class of <name>
+
+    //  If you wish to instead override a style other than color (for instance background) add optional element: 
+    //  {name: 'val', value: '#FFF', style: 'background'}
+    
+    //  If you wish to apply customization to ALL elements of a given tab, in this example a head 1 tag:
+    //  {name: 'val', value: '#FFF', tag: 'h1'}
+    //
+    //
     const themes = [
-      { id: 1, name: 'Theme-Forward One', custom_color_background: 'lightblue', custom_color_header: 'darkblue', custom_color_sidebar: 'blue' },
-      { id: 2, name: 'Theme-Founders', custom_color_background: 'lightgreen', custom_color_header: 'darkgreen', custom_color_sidebar: 'green' },
+      { id: 1, 
+        name: 'Theme-Forward One', 
+        customs:[
+          { name: 'custom_color_background', value: 'lightblue', tag: 'body', style:'background'},
+          { name: 'customColorHeader', value: 'darkblue', style:'background'},
+          { name: 'customColorFooter', value: 'darkblue', style:'background'},
+          { name: 'customColorSidebar', value: 'blue', style:'background'},
+          { name: 'logo', value: '/assets/logo-1.jpg', image: 'logo'},
+        ]        
+      },
+      { id: 2, 
+        name: 'Theme-Founders', 
+        customs:[
+          { name: 'custom_color_background', value: 'lightgreen', tag: 'body', style:'background'},
+          { name: 'customColorHeader', value: 'darkgreen', style:'background'},
+          { name: 'customColorFooter', value: 'darkgreen', style:'background'},
+          { name: 'customColorSidebar', value: 'green', style:'background'},
+          { name: 'customColorSidebar', value: 'lightgreen'},
+          { name: 'logo', value: '/assets/logo-2113.png', image: 'logo'},      
+        ]
+      },
     ]
     
     const navlinks = [

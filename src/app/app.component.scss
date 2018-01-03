@@ -40,6 +40,20 @@ h1 {
     }
   }
 
+  // default theme colors, applied until overridden
+  .customColorHeader{
+    color: red;  
+  }
+
+  body {
+    background-color: gray;
+  }
+  .header {
+    background-color: darkgray;
+  }
+  // end default theme colors
+
+
   // collapsible sidebar
   // .wrapper {
   //   display: flex;

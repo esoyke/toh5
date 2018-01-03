@@ -5,7 +5,7 @@ import { ThemeService } from './theme.service';
 @Component({
     selector: 'theme-select',
     template: `
-        <select [(ngModel)]="currentTheme" (change)="setCurrentTheme()">
+        <select style='margin: 2em' [(ngModel)]="currentTheme" (change)="setCurrentTheme()">
             <option [disabled]="true" [ngValue]="null">Select Theme...</option>
             <option *ngFor="let theme of themes" [ngValue]="theme">{{theme.name}}</option>
         </select>

@@ -1,13 +1,11 @@
 <!--component html goes here -->
-<div class='sidebarNav customColorSidebar d-flex flex-column'>
+<div class='sidebarNav d-flex flex-column '>
 
-        <ul class="heroes">
-            <li *ngFor="let link of navlinks">
-                <!-- <a routerLink="/detail/{{hero.id}}"> -->
-                <span class="badge p-2">{{link.name}}</span>
-                <!-- </a> -->
-           </li>
-        </ul>
+    <div *ngFor="let link of navlinks">    
+        <!-- <a routerLink="/detail/{{hero.id}}"> -->
+        <span class="badge p-2 customColorSidebar d-flex justify-content-center align-items-center">{{link.name}}</span>
+        <!-- </a> -->      
+        </div>
         
     <!-- <sidebar-button class="p-2">{{name}}</sidebar-button>
     <sidebar-button class="p-2">Flex item 2</sidebar-button>

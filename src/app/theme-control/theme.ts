@@ -3,8 +3,11 @@
 export class Theme {
     id: number;
     name: string;
-    custom_color_header: string;
-    custom_color_background: string;
-    custom_color_sidebar: string;    
+    customs: {
+       name: string,
+       value: string,
+       tag: string,
+       style: string
+    }
   }
   
