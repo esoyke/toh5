@@ -115,13 +115,13 @@ export class ThemeService {
 
     // apply
     _.each(elements, (elem)=>{
-      if(!custom.style || custom.style==='color'){
-        //console.log('updating color to '+custom.value+' on element: ', elem);
-        elem.style.color=custom.value;
-      }
-      else if (custom.style && custom.style==='background'){
-        //console.log('updating '+custom.style+' to '+custom.value+' on element: ', elem);
+      if(!custom.style || custom.style==='background'){
+        //console.log('updating background to '+custom.value+' on element: ', elem);
         elem.style.background=custom.value;
+      }
+      else if (custom.style && custom.style==='color'){
+        //console.log('updating '+custom.style+' to '+custom.value+' on element: ', elem);
+        elem.style.color=custom.value;
       }
       //TODO adjust syntax to allow other than color and background
       else

@@ -20,34 +20,38 @@ export class InMemoryDataService implements InMemoryDbService {
     //
     //  At the moment I am structuring the custom color elements as such:
     //    {name: 'val', value: '#FFF', tag: 'tagName', style: 'background'}
-    //  By default the defined style.color is applied to elements with the class of <name>
+    //  By default the defined style.background is applied to elements with the class of <name>
 
-    //  If you wish to instead override a style other than color (for instance background) add optional element: 
-    //  {name: 'val', value: '#FFF', style: 'background'}
+    //  If you wish to instead override a style other than background (for instance background) add optional element 'style': 
+    //  (currently only color, background are supported)
+    //  {name: 'val', value: '#FFF', style: 'color'}
     
-    //  If you wish to apply customization to ALL elements of a given tab, in this example a head 1 tag:
+    //  If you wish to apply customization to ALL elements of a given tag, in this example a head 1 tag:
     //  {name: 'val', value: '#FFF', tag: 'h1'}
+    //  Note that for such tag-based customizations, the name field is irrelevant.
     //
     //
     const themes = [
-      { id: 1, 
+      { 
+        id: 1, 
         name: 'Theme-Forward One', 
         customs:[
-          { name: 'custom_color_background', value: 'lightblue', tag: 'body', style:'background'},
-          { name: 'customColorHeader', value: 'darkblue', style:'background'},
-          { name: 'customColorFooter', value: 'darkblue', style:'background'},
-          { name: 'customColorSidebar', value: 'blue', style:'background'},
+          { name: 'custom_color_background', value: 'lightblue', tag: 'body'},
+          { name: 'customColorHeader', value: 'darkblue'},
+          { name: 'customColorFooter', value: 'darkblue'},
+          { name: 'customColorSidebar', value: 'blue'},
           { name: 'logo', value: '/assets/logo-1.jpg', image: 'logo'},
         ]        
       },
-      { id: 2, 
+      { 
+        id: 2, 
         name: 'Theme-Founders', 
         customs:[
-          { name: 'custom_color_background', value: 'lightgreen', tag: 'body', style:'background'},
-          { name: 'customColorHeader', value: 'darkgreen', style:'background'},
-          { name: 'customColorFooter', value: 'darkgreen', style:'background'},
-          { name: 'customColorSidebar', value: 'green', style:'background'},
-          { name: 'customColorSidebar', value: 'lightgreen'},
+          { name: 'custom_color_background', value: 'lightgreen', tag: 'body'},
+          { name: 'customColorHeader', value: 'darkgreen'},
+          { name: 'customColorFooter', value: 'darkgreen'},
+          { name: 'customColorSidebar', value: 'green'},
+          { name: 'customColorSidebar', value: 'lightgreen', style: 'color'},
           { name: 'logo', value: '/assets/logo-2113.png', image: 'logo'},      
         ]
       },
